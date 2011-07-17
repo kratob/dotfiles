@@ -2,7 +2,7 @@ require 'rake'
 
 desc "Hook our dotfiles into system-standard positions."
 task :install do
-  linkables = Dir.glob('*/**{.symlink}')
+  linkables = Dir.glob('**/*.symlink', File::FNM_DOTMATCH)
 
   skip_all = false
   overwrite_all = false
@@ -12,8 +12,12 @@ task :install do
     overwrite = false
     backup = false
 
-    file = linkable.split('/').last.split('.symlink')
-    target = "#{ENV["HOME"]}/.#{file}"
+    full_path = linkable.split('/')
+    file = full_path.last.split('.symlink')
+    dir = full_path[1..-2].join('/')
+    target_dir = ENV["HOME"]
+    target_dir += "/#{dir}" if dir and dir != ''
+    target = "#{target_dir}/#{file}"
 
     if File.exists?(target) || File.symlink?(target)
       unless skip_all || overwrite_all || backup_all
@@ -27,7 +31,7 @@ task :install do
         end
       end
       FileUtils.rm_rf(target) if overwrite || overwrite_all
-      `mv "$HOME/.#{file}" "$HOME/.#{file}.backup"` if backup || backup_all
+      `mv "#{target}" "#{target}.backup"` if backup || backup_all
     end
     `ln -s "$PWD/#{linkable}" "#{target}"`
   end

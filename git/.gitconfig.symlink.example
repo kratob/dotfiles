@@ -1,0 +1,15 @@
+[user]
+        name = Tobias Kraze
+        email = tobias@kraze.eu
+[color]
+        diff = auto
+        status = auto
+        branch = auto
+	interactive = auto
+[core]
+        excludesfile = ~/.gitignore
+        editor = vim
+[github]
+        user = kratob
+[merge]
+        tool = vimdiff
