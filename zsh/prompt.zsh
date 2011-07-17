@@ -60,7 +60,7 @@ todo(){
 }
 
 directory_name(){
-  echo "%{$fg_bold[blue]%}${PWD/#$HOME/~}%{$reset_color%}"
+  echo "%{$fg_bold[magenta]%}${PWD/#$HOME/~}%{$reset_color%}"
 }
 
 
