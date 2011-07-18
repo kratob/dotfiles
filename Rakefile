@@ -36,6 +36,7 @@ task :install do
         `ln -s "$PWD/#{linkable}" "#{target}"`
       end
     else
+      FileUtils.mkdir_p(target_dir)
       `ln -s "$PWD/#{linkable}" "#{target}"` unless File.symlink?(target)
     end
   end
