@@ -27,16 +27,24 @@ git_prompt_info () {
  echo "${ref#refs/heads/}"
 }
 
+local_ref () {
+  /usr/bin/git show-ref $(git_branch) --heads --hash 2>/dev/null
+}
+
+remote_ref () {
+  /usr/bin/git show-ref origin/$(git_branch) --hash 2>/dev/null
+}
+
 unpushed () {
   /usr/bin/git cherry -v origin/$(git_branch) 2>/dev/null
 }
 
 need_push () {
-  if [[ $(unpushed) == "" ]]
+  if [[ $(local_ref) == $(remote_ref) ]]
   then
     echo " "
   else
-    echo " with %{$fg_bold[magenta]%}unpushed%{$reset_color%} "
+    echo " %{$fg_bold[cyan]%}(unpushed)%{$reset_color%} "
   fi
 }
 
@@ -64,7 +72,7 @@ directory_name(){
 }
 
 
-export PROMPT=$'\n$(directory_name) $(git_dirty)\n› '
+export PROMPT=$'\n$(directory_name) $(git_dirty)$(need_push)\n› '
 set_prompt () {
   export RPROMPT="%{$fg_bold[grey]%}$(todo)%{$reset_color%}"
 }
