@@ -1,0 +1,3 @@
+#!/bin/sh
+
+recordmydesktop --no-sound --on-the-fly-encoding -o ~/captures/`date +%F`
