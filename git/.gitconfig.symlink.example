@@ -1,15 +1,17 @@
 [user]
-        name = Tobias Kraze
-        email = tobias@kraze.eu
+	name = Tobias Kraze
+	email = tobias.kraze@makandra.de
 [color]
-        diff = auto
-        status = auto
-        branch = auto
+	branch = auto
+	diff = auto
 	interactive = auto
+	status = auto
 [core]
-        excludesfile = ~/.gitignore
-        editor = vim
-[github]
-        user = kratob
+	editor = vim
+  excludesfile = ~/.gitignore
 [merge]
-        tool = vimdiff
+	tool = vimdiff
+[push]
+	default = current
+[github]
+  user = kratob
