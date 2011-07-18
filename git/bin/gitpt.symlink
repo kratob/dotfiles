@@ -4,11 +4,14 @@ require 'rubygems'
 require 'highline'
 require 'pivotal-tracker'
 
+highline = HighLine.new
 
-token = File.read(File.join(ENV['HOME'], '.pt_token'))
+
+token_file = File.join(ENV['HOME'], '.pt_token')
+token = File.read(token_file) if File.exists?(token_file)
 
 unless token and token.size > 10
-  say "Sorry, I could not find a token in ~/.pt_token."
+  highline.say "Sorry, I could not find a token in ~/.pt_token."
   exit 1
 end
 
@@ -16,18 +19,17 @@ PivotalTracker::Client.token = token
 PivotalTracker::Client.use_ssl = true
 
 
-project_id = File.read('.pt_project_id').to_i
+project_id_file = '.pt_project_id'
+project_id = File.read('.pt_project_id').to_i if File.exists?(project_id_file)
 
 unless project_id and project_id > 0
-  say "Sorry, I could not find a project_id in .pt_project_id."
+  highline.say "Sorry, I could not find a project_id in .pt_project_id."
   exit 1
 end
 
 project = PivotalTracker::Project.find(project_id)
 
 started_and_finished_stories = project.stories.all(:state => 'started,finished')
-
-highline = HighLine.new
 
 selected_story = nil
 
@@ -42,7 +44,7 @@ end
 
 if selected_story
   puts
-  message = highline.ask('Add a message')
+  message = highline.ask('Add an optional message')
   puts message
 
   commit_message = "[##{selected_story.id}] #{selected_story.name}"
