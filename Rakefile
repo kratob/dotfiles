@@ -30,10 +30,14 @@ task :install do
         when 'S' then skip_all = true
         end
       end
-      FileUtils.rm_rf(target) if overwrite || overwrite_all
       `mv "#{target}" "#{target}.backup"` if backup || backup_all
+      if overwrite || overwrite_all
+        FileUtils.rm_rf(target) 
+        `ln -s "$PWD/#{linkable}" "#{target}"`
+      end
+    else
+      `ln -s "$PWD/#{linkable}" "#{target}"` unless File.symlink?(target)
     end
-    `ln -s "$PWD/#{linkable}" "#{target}"`
   end
 end
 task :default => 'install'
