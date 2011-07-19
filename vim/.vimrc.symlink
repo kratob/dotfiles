@@ -71,6 +71,7 @@ let g:EasyGrepCurrentBufferDir=0
 let g:sparkupNextMapping = '<leader><c-e>'
 let g:CommandTMaxFiles=50000
 
+let g:utl_cfg_hdl_mt_generic = 'silent !xdg-open %u'
 
 autocmd Syntax * syn match Nbsp / / containedin=ALL
 
