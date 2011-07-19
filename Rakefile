@@ -13,7 +13,7 @@ task :install do
     backup = false
 
     full_path = linkable.split('/')
-    file = full_path.last.split('.symlink')
+    file = full_path.last.split('.symlink').first
     dir = full_path[1..-2].join('/')
     target_dir = ENV["HOME"]
     target_dir += "/#{dir}" if dir and dir != ''
