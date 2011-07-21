@@ -10,4 +10,4 @@ alias gb='git branch'
 alias gs='git status -s' # upgrade your git if -sb breaks for you. it's fun.
 alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
 
-alias gitstories='git log --since="1 am today" --format="%s," | grep "[#.*]"'
+alias gitstories='git log --author="tobias@kraze.eu" --since="1 am today" --format="%s," | grep "[#.*]"'
