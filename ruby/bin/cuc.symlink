@@ -5,7 +5,9 @@
 
 # Check if cucumber_spinner is available
 spinner_available = File.exists?('Gemfile') && File.open('Gemfile').read.scan(/cucumber_spinner/).any?
-format_args = spinner_available ? ['--format', 'CucumberSpinner::CuriousProgressBarFormatter'] : ['--format', 'progress']
-format_args << ['--profile', 'rerun']
+format_args = []
+format_args << (spinner_available ? ['--format', 'CucumberSpinner::CuriousProgressBarFormatter'] : ['--format', 'progress']) unless ARGV.include?('--format') or ARGV.include?('-f')
+format_args << ['--profile', 'rerun'] unless ARGV.include?('--profile') or ARGV.include?('-p')
 
+ENV["LAUNCHY_BROWSER"] = `which google-chrome`.strip
 exec *["b", "cucumber", format_args, ARGV].flatten
