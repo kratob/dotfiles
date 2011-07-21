@@ -30,3 +30,5 @@ exec "Snippet reject { |".st."element".et."| ".st."element".et.".".st.et." }<CR>
 exec "Snippet rejecto reject do |".st."element".et."| <CR>".st."element".et.".".st.et."<CR>end<CR>".st.et
 exec "Snippet inject inject(".st."object".et.") { |".st."injection".et.", ".st."element".et."| ".st.et." }<CR>".st.et
 exec "Snippet select select { |".st."element".et."| ".st."element".et.".".st.et." }<CR>".st.et
+
+exec "Snippet trait module ``RubyClassifyFile()``<CR>  as_trait do<CR><CR>    ".st.et."<CR><CR>end<CR>end"

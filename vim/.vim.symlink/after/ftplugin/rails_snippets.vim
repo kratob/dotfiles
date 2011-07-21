@@ -56,3 +56,4 @@ exec "Snippet tf .text_field<CR>= form.label :".st."field".et."<CR>= form.text_f
 exec "Snippet ta .text_area<CR>= form.label :".st."field".et."<CR>= form.text_area :".st."field".et."<CR><BS>".st.et
 exec "Snippet pf .password_field<CR>= form.label :".st."field".et."<CR>= form.text_field :".st."field".et."<CR><BS>".st.et
 
+exec "Snippet spec require 'spec_helper'<CR><CR>describe " .st."model:WhenNotDefault(@z, 'model', RubyClassify('``expand('%')``'))".et. " do<CR><CR>  ".st.et."<CR><CR>end"

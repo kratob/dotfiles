@@ -78,3 +78,26 @@ autocmd Syntax * syn match Nbsp / / containedin=ALL
 
 ab destionation destination
 ab Destionation Destination
+
+
+function! RubyEval(code, ...)
+  let fullcode = 'ruby argv = VIM::evaluate("a:000"); retval = begin ' . a:code . ' end; VIM::command("let l:retval=\"#{retval}\"")'
+  execute fullcode
+  return retval
+endfunction
+
+function! RubyClassifyFile()
+  return RubyClassify(expand('%'))
+endfunction
+
+function! RubyClassify(file)
+  return RubyEval('require %{rubygems}; require %{active_support}; require %{active_support/inflector}; ActiveSupport::Inflector.classify((argv.first.split(%r{[/.]}) - %w[app models controllers spec rb]).join(%{/}))', a:file)
+endfunction
+
+function! WhenNotDefault(given, default, alternative)
+  if a:given == a:default
+    return a:alternative
+  else
+    return a:given
+  endif
+endfunction
