@@ -103,6 +103,11 @@ directory_name(){
 
 export PROMPT=$'\n$(directory_name) $(git_prompt) $(need_push)\n› '
 
+set_prompt(){
+  export RPROMPT="%{$fg[green]%}$(rvm-prompt 2>/dev/null)%{$reset_color%}"
+}
+
 precmd() {
   title "zsh" "%m" "%55<...<%~"
+  set_prompt
 }
