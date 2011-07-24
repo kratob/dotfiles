@@ -8,6 +8,7 @@ spinner_available = File.exists?('Gemfile') && File.open('Gemfile').read.scan(/c
 format_args = []
 format_args << (spinner_available ? ['--format', 'CucumberSpinner::CuriousProgressBarFormatter'] : ['--format', 'progress']) unless ARGV.include?('--format') or ARGV.include?('-f')
 format_args << ['--profile', 'rerun'] unless ARGV.include?('--profile') or ARGV.include?('-p')
+format_args << ['-r', 'features', '-r', File.join(File.dirname(__FILE__), 'redirect_firefox_on_awesome.rb')]
 
 ENV["LAUNCHY_BROWSER"] = `which google-chrome`.strip
 exec *["b", "cucumber", format_args, ARGV].flatten

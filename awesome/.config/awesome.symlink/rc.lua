@@ -15,6 +15,7 @@ require("naughty")
 -- Themes define colours, icons, and wallpapers
 beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 
+
 -- This is used later as the default terminal and editor to run.
 terminal = "gnome-terminal"
 editor = os.getenv("EDITOR") or "editor"
@@ -321,6 +322,7 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "Skype" }, properties = {}, callback = awful.client.setslave },
     { rule = { class = "Gnome-panel" }, properties = { ontop = true } },
+    { rule = { class = "Firefox" }, callback = function(c) if should_redirect_firefox() then awful.client.movetotag(tags[1][6], c) end end },
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
@@ -357,3 +359,14 @@ end)
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+
+redirect_firefox_until = 0
+
+redirect_firefox_next_seconds = function(seconds) 
+  redirect_firefox_until = os.time() + seconds
+end
+
+should_redirect_firefox = function() 
+  return os.time() < redirect_firefox_until
+end
