@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 
+require 'yaml'
+require 'erb'
+
 # Print some whitespace
 4.times { puts }
 
@@ -7,7 +10,11 @@
 spinner_available = File.exists?('Gemfile') && File.open('Gemfile').read.scan(/cucumber_spinner/).any?
 format_args = []
 format_args << (spinner_available ? ['--format', 'CucumberSpinner::CuriousProgressBarFormatter'] : ['--format', 'progress']) unless ARGV.include?('--format') or ARGV.include?('-f')
-format_args << ['--profile', 'rerun'] unless ARGV.include?('--profile') or ARGV.include?('-p')
+
+cucumber_config = File.join('config', 'cucumber.yml')
+if File.exists?(cucumber_config) and YAML.load(ERB.new(File.read(cucumber_config)).result)['rerun']
+  format_args << ['--profile', 'rerun'] unless ARGV.include?('--profile') or ARGV.include?('-p')
+end
 
 ENV["LAUNCHY_BROWSER"] = `which google-chrome`.strip
 exec *["b", "cucumber", format_args, ARGV].flatten
