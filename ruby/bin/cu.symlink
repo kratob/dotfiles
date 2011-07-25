@@ -16,5 +16,5 @@ if File.exists?(cucumber_config) and YAML.load(ERB.new(File.read(cucumber_config
   format_args << ['--profile', 'rerun'] unless ARGV.include?('--profile') or ARGV.include?('-p')
 end
 
-ENV["LAUNCHY_BROWSER"] = `which google-chrome`.strip
+ENV["LAUNCHY_BROWSER"] = `which epiphany`.strip
 exec *["b", "cucumber", format_args, ARGV].flatten
