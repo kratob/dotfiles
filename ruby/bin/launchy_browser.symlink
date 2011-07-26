@@ -1,0 +1,3 @@
+#!/bin/sh
+DISPLAY=$LAUNCHY_DISPLAY
+epiphany
