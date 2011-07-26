@@ -28,7 +28,7 @@ git_prompt() {
     branch="$(cat "$git_dir/rebase-merge/head-name")"
   elif test -f "$git_dir/MERGE_HEAD"; then
     merge_branch="$(git describe `cat $git_dir/MERGE_HEAD` --all 2>/dev/null)"
-    state="merge with ${merge_branch#heads/}"
+    state="merge with ${${merge_branch#heads/}#remotes/}"
     branch="$(git symbolic-ref HEAD 2>/dev/null)"
   else
     if test -f "$git_dir/BISECT_LOG"; then
