@@ -91,7 +91,7 @@ function! RubyClassifyFile()
 endfunction
 
 function! RubyClassify(file)
-  return RubyEval('require %{rubygems}; require %{active_support}; require %{active_support/inflector}; ActiveSupport::Inflector.classify((argv.first.split(%r{[/._]}) - %w[app models controllers spec rb]).join(%{/}))', a:file)
+  return RubyEval('require %{rubygems}; require %{active_support}; require %{active_support/inflector}; ActiveSupport::Inflector.classify((argv.first.split(%r{[/.]}) - %w[app models controllers spec rb]).join(%{/}).gsub(/_spec/,""))', a:file)
 endfunction
 
 function! WhenNotDefault(given, default, alternative)
