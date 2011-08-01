@@ -1626,7 +1626,7 @@ endfunction
 " }}}
 " GrepSetManual {{{
 function! s:GrepSetManual(str)
-    call s:SetGatewayVariables()
+    "call s:SetGatewayVariables() messes up error messages
     let str = a:str
     if s:IsRecursive(str)
         call s:Error("User specified grep pattern may not have a recursive specifier")
