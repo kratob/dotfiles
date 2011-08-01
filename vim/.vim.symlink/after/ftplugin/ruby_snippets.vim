@@ -32,3 +32,4 @@ exec "Snippet inject inject(".st."object".et.") { |".st."injection".et.", ".st."
 exec "Snippet select select { |".st."element".et."| ".st."element".et.".".st.et." }<CR>".st.et
 
 exec "Snippet trait module ``RubyClassifyFile()``<CR>  as_trait do<CR><CR>    ".st.et."<CR><CR>end<CR>end"
+exec "Snippet spec require 'spec_helper'<CR><CR>describe " .st."model:WhenNotDefault(@z, 'model', RubyClassify('``expand('%')``'))".et. " do<CR><CR>  ".st.et."<CR><CR>end"
