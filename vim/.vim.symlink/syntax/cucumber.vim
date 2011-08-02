@@ -91,6 +91,7 @@ syn match   cucumberExampleTable  "\%(^\s*\)\@<=|.*" contains=cucumberDelimiter
 syn match   cucumberDelimiter     "|" contained
 syn match   cucumberTags          "\%(^\s*\)\@<=\%(@[^@[:space:]]\+\s\+\)*@[^@[:space:]]\+\s*$"
 syn region  cucumberString   start=+\%(^\s*\)\@<="""+ end=+"""+ contained
+syn region  cucumberString   start=+"+ end=+"+ contained
 
 call s:Add('Then')
 call s:Add('When')
