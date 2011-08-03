@@ -586,7 +586,7 @@ exe "hi! Special"        .s:fmt_none   .s:fg_red    .s:bg_none
 exe "hi! Underlined"     .s:fmt_none   .s:fg_violet .s:bg_none
 "       *Underlined      text that stands out, HTML links
 
-exe "hi! Ignore"         .s:fmt_none   .s:fg_none   .s:bg_none
+exe "hi! Ignore"         .s:fmt_none   .s:fg_back   .s:bg_none
 "       *Ignore          left blank, hidden  |hl-Ignore|
 
 exe "hi! Error"          .s:fmt_bold   .s:fg_red    .s:bg_none
@@ -686,10 +686,11 @@ hi! link vimUserFunc Function
 hi! link helpSpecial Special
 hi! link vimSet Normal
 hi! link vimSetEqual Normal
+hi! link helpIgnore Ignore
 exe "hi! vimCommentString"  .s:fmt_none    .s:fg_violet .s:bg_none
 exe "hi! vimCommand"        .s:fmt_none    .s:fg_yellow .s:bg_none
 exe "hi! vimCmdSep"         .s:fmt_bold    .s:fg_blue   .s:bg_none
-exe "hi! helpExample"       .s:fmt_none    .s:fg_base1  .s:bg_none
+exe "hi! helpExample"       .s:fmt_none    .s:fg_base3  .s:bg_none
 exe "hi! helpOption"        .s:fmt_none    .s:fg_cyan   .s:bg_none
 exe "hi! helpNote"          .s:fmt_none    .s:fg_magenta.s:bg_none
 exe "hi! helpVim"           .s:fmt_none    .s:fg_magenta.s:bg_none
