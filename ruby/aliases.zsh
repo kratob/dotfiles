@@ -8,6 +8,7 @@ function _rails_command () {
   fi
 }
 
+alias pryc='pry -r./config/environment.rb'
 alias rc='_rails_command console'
 alias rg='_rails_command generate'
 alias rd='_rails_command destroy'
