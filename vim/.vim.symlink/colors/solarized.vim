@@ -788,7 +788,7 @@ exe "hi! texRefLabel"    . s:fg_yellow .s:bg_back   .s:fmt_none
 exe "hi! rubyDefine"     . s:fg_base1  .s:bg_back   .s:fmt_bold
 "rubyInclude
 "rubySharpBang
-"rubyAccess
+hi! link rubyAccess            PreProc
 "rubyPredefinedVariable
 "rubyBoolean
 "rubyClassVariable
