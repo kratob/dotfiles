@@ -20,7 +20,7 @@ ENV["LAUNCHY_DISPLAY"] = ENV["DISPLAY"]
 ENV["LAUNCHY_BROWSER"] = File.join(File.dirname(__FILE__), 'launchy_browser')
 
 # start vnc for "headless" selenium
-`vncserver :6 -localhost -nolisten tcp -SecurityTypes None &>/dev/null`
+`vncserver :6 -localhost -nolisten tcp -SecurityTypes None -geometry 1280x1024 &>/dev/null`
 ENV["DISPLAY"] = ':6'
 
 exec *["b", "cucumber", format_args, ARGV].flatten
