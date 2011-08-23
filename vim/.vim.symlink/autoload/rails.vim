@@ -1887,6 +1887,9 @@ function! s:RailsFind()
   let res = s:findamethod('does', 'app/models/shared/\1_trait.rb')
   if res != "" && filereadable(res)|return res|endif
 
+  let res = s:findamethod('does', 'app/behaviors/\1_trait.rb')
+  if res != "" && filereadable(res)|return res|endif
+
   let res = rails#singularize(s:findamethod('create_table\|change_table\|drop_table\|add_column\|rename_column\|remove_column\|add_index','app/models/\1'))
   if res != ""|return res.".rb"|endif
 
