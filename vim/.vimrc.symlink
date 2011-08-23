@@ -25,6 +25,7 @@ set undodir=~/.temp
 set undofile
 set wildmenu
 set history=500
+set showbreak=↳\ 
 
 let mapleader = ","
 inoremap jj <ESC>
