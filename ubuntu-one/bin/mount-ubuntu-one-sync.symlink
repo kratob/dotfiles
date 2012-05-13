@@ -1,0 +1,4 @@
+#!/bin/sh
+
+KEYFILE=~/.sync.key
+encfs --extpass="cat $KEYFILE" ~/Ubuntu\ One/encrypted ~/sync
