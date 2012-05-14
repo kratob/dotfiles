@@ -18,6 +18,7 @@ end
 
 ENV["LAUNCHY_DISPLAY"] = ENV["DISPLAY"]
 ENV["LAUNCHY_BROWSER"] = File.join(File.dirname(__FILE__), 'launchy_browser')
+ENV["BROWSER"] = File.join(File.dirname(__FILE__), 'launchy_browser')
 
 if ENV["SELENIUM_FIREFOX_PATH"]
   ENV["PATH"] = "#{ENV["SELENIUM_FIREFOX_PATH"]}:#{ENV["PATH"]}"
