@@ -1,3 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 DISPLAY=$LAUNCHY_DISPLAY
-epiphany -n $@
+google-chrome $@ &
+disown
