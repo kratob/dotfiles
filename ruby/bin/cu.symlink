@@ -28,4 +28,12 @@ end
 `vncserver :6 -localhost -nolisten tcp -SecurityTypes None -geometry 1280x1024 &>/dev/null`
 ENV["DISPLAY"] = ':6'
 
-exec *["b", "cucumber", format_args, ARGV].flatten
+parallel_tests_available = ['rake', 'parallel:spec'] if File.exists?('Gemfile') && File.open('Gemfile').read.scan(/parallel_tests/).any?
+
+use_parallel_tests = parallel_tests_available && (ARGV[0].nil? ? ENV['PARALLEL'] != '0' : ENV['PARALLEL'] == '1')
+
+if use_parallel_tests
+  exec *["b", "parallel_cucumber", "-n", "6", ARGV.join(" ")].flatten
+else
+  exec *["b", "cucumber", format_args, ARGV].flatten
+end
