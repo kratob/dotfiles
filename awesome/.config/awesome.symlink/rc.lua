@@ -170,7 +170,7 @@ for s = 1, screen.count() do
         mylayoutbox[s],
         mytextclock,
         kbdcfg.widget,
-        (s == 2 or screen.count() == 1) and mysystray or nil,
+        (s == 1 or screen.count() == 1) and mysystray or nil,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft,
     }
@@ -321,6 +321,7 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "Skype" }, properties = {}, callback = awful.client.setslave },
     { rule = { class = "Gnome-panel" }, properties = { ontop = true } },
+    { rule = { class = "epiphany" }, properties = { floating = false } },
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
