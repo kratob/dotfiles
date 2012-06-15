@@ -1,0 +1,3 @@
+#!/bin/sh
+mkdir -p ~/sync-backup
+rsync -a ~/sync/ ~/sync-backup/
