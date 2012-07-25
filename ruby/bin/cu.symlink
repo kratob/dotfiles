@@ -1,21 +1,5 @@
 #!/usr/bin/env ruby
 
-require 'yaml'
-require 'erb'
-
-# Print some whitespace
-4.times { puts }
-
-# Check if cucumber_spinner is available
-spinner_available = File.exists?('Gemfile') && File.open('Gemfile').read.scan(/cucumber_spinner/).any?
-format_args = []
-format_args << (spinner_available ? ['--format', 'CucumberSpinner::CuriousProgressBarFormatter'] : ['--format', 'progress']) unless ARGV.include?('--format') or ARGV.include?('-f')
-
-cucumber_config = File.join('config', 'cucumber.yml')
-if File.exists?(cucumber_config) and YAML.load(ERB.new(File.read(cucumber_config)).result)['rerun']
-  format_args << ['--profile', 'rerun'] unless ARGV.include?('--profile') or ARGV.include?('-p')
-end
-
 ENV["LAUNCHY_DISPLAY"] = ENV["DISPLAY"]
 ENV["LAUNCHY_BROWSER"] = File.join(File.dirname(__FILE__), 'launchy_browser')
 ENV["BROWSER"] = File.join(File.dirname(__FILE__), 'launchy_browser')
@@ -28,12 +12,4 @@ end
 `vncserver :6 -localhost -nolisten tcp -SecurityTypes None -geometry 1280x1024 &>/dev/null`
 ENV["DISPLAY"] = ':6'
 
-parallel_tests_available = ['rake', 'parallel:spec'] if File.exists?('Gemfile') && File.open('Gemfile').read.scan(/parallel_tests/).any?
-
-use_parallel_tests = parallel_tests_available && (ARGV[0].nil? ? ENV['PARALLEL'] != '0' : ENV['PARALLEL'] == '1')
-
-if use_parallel_tests
-  exec *["b", "parallel_cucumber", "-n", "6", ARGV.join(" ")].flatten
-else
-  exec *["b", "cucumber", format_args, ARGV].flatten
-end
+exec *['cuc', ARGV].flatten
