@@ -3,4 +3,4 @@
 mkdir -p ~/sync
 
 KEYFILE=~/.sync.key
-encfs --extpass="cat $KEYFILE" ~/Ubuntu\ One/encrypted ~/sync
+encfs --extpass="cat $KEYFILE" ~/Ubuntu\ One/encrypted.bc ~/sync
