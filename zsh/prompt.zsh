@@ -100,8 +100,11 @@ directory_name(){
   echo "%{$fg_bold[magenta]%}${PWD/#$HOME/~}%{$reset_color%}"
 }
 
+caret() {
+  echo "%(?..%{$fg[red]%})›%{$reset_color%}"
+}
 
-export PROMPT=$'\n$(directory_name) $(git_prompt) $(need_push)\n› '
+export PROMPT=$'\n$(directory_name) $(git_prompt) $(need_push)\n$(caret) '
 
 set_prompt(){
   export RPROMPT="%{$fg[green]%}$(rvm-prompt 2>/dev/null)%{$reset_color%}"
