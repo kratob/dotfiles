@@ -308,7 +308,7 @@ root.keys(globalkeys)
 awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
-      properties = { border_width = beautiful.border_width,
+      properties = { border_width = "2",
                      border_color = beautiful.border_normal,
                      focus = true,
                      keys = clientkeys,
@@ -340,6 +340,19 @@ client.add_signal("manage", function (c, startup)
             and awful.client.focus.filter(c) then
             client.focus = c
         end
+    end)
+
+    c:add_signal("property::urgent", function(c)
+      if c.urgent then
+        -- Change the border color of the urgent window.
+        -- You'll need to define the color in your theme.lua, e.g.
+        -- theme.border_urgent = "#FF3737CC"
+        -- or you set the color directly to c.border_color 
+        c.border_color = beautiful.bg_urgent
+
+        -- Show a popup notification with the window title
+        naughty.notify({text="Urgent: " .. c.name})
+      end
     end)
 
     if not startup then
