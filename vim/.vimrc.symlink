@@ -75,6 +75,7 @@ let g:CommandTMaxFiles=50000
 let g:utl_cfg_hdl_mt_generic = 'silent !xdg-open %u'
 
 autocmd Syntax * syn match Nbsp / / containedin=ALL
+autocmd Syntax * syn match Nbsp /\s\+$\| \+\ze\t/ containedin=ALL
 
 
 ab destionation destination
@@ -106,6 +107,6 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 
 au BufNewFile,BufRead *.feature execute "AlignCtrl =p01111111111111111111111111P1 |"
 
-autocmd FileType ruby,sass autocmd BufWritePre <buffer> :%s/\s\+$//e
+"autocmd FileType ruby,sass autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 let g:ruby_debugger_debug_mode=1
