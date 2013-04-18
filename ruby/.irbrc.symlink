@@ -11,8 +11,6 @@ IRB.conf[:PROMPT_MODE] = :SIMPLE
 
 IRB.conf[:AUTO_INDENT] = true
 
-Hirb.enable
-
 def me
   User.find_by_email('tobias.kraze@makandra.de')
 end
