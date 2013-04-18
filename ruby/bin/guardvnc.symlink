@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'geordi/cuc'
+
+cuc = Geordi::Cucumber.new
+
+cuc.send(:setup_vnc)
+
+exec "bundle exec guard"
