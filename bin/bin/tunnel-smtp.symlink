@@ -1,2 +1,2 @@
 #! /bin/sh
-ssh -N -L2525:mail.makandra.de:25 tobias@login.makandra.de
+ssh -N -L2525:mail.makandra.de:25 tobias@code.makandra.de
