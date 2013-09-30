@@ -47,7 +47,7 @@ git_prompt() {
   fi
 
   st=$(/usr/bin/git status 2>/dev/null | tail -n 1)
-  if [[ $st == "nothing to commit (working directory clean)" ]]
+  if [[ $st == *"nothing to commit"* ]]
   then
     echo "on %{$fg_bold[green]%}$info%{$reset_color%}"
   else
