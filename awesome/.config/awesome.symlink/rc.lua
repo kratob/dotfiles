@@ -170,7 +170,7 @@ for s = 1, screen.count() do
         mylayoutbox[s],
         mytextclock,
         kbdcfg.widget,
-        (s == 1 or screen.count() == 1) and mysystray or nil,
+        (s == 2 or screen.count() == 1) and mysystray or nil,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft,
     }
