@@ -47,7 +47,6 @@ augroup filetypedetect
 au BufNewFile,BufRead *.asy setf asy
 augroup end
 
-autocmd User BufEnterRails set notagrelative
 autocmd User BufEnterRails normal ,vyu
 
 au FocusLost * silent! wa

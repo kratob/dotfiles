@@ -15,3 +15,7 @@
 	default = current
 [github]
   user = kratob
+[alias]
+	ctags = !.git/hooks/ctags
+[init]
+	templatedir = ~/.git_template
