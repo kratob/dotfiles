@@ -119,3 +119,5 @@ augroup rubypath
   autocmd FileType ruby setlocal suffixesadd+=_trait.rb
   autocmd FileType ruby setlocal path+=app/models/shared
 augroup END
+
+runtime macros/matchit.vim
