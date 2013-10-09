@@ -111,3 +111,11 @@ au BufNewFile,BufRead *.feature execute "AlignCtrl =p01111111111111111111111111P
 "autocmd FileType ruby,sass autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 let g:ruby_debugger_debug_mode=1
+
+
+augroup rubypath
+  autocmd!
+
+  autocmd FileType ruby setlocal suffixesadd+=_trait.rb
+  autocmd FileType ruby setlocal path+=app/models/shared
+augroup END
