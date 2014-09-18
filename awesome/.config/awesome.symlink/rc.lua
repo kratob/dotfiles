@@ -92,6 +92,21 @@ kbdcfg.widget:buttons(awful.util.table.join(
     awful.button({ }, 1, function () kbdcfg.switch() end)
 ))
 
+
+-- Create an ACPI widget
+batterywidget = widget({ type = "textbox" })
+batterywidget.text = " | Battery | "
+batterywidgettimer = timer({ timeout = 5 })
+batterywidgettimer:add_signal("timeout",
+  function()
+    fh = assert(io.popen("acpi | cut -d, -f 2,3 -", "r"))
+    batterywidget.text = " |" .. fh:read("*l") .. " | "
+    fh:close()
+  end
+)
+batterywidgettimer:start()
+
+
 -- {{{ Wibox
 -- Create a textclock widget
 mytextclock = awful.widget.textclock({ align = "right" })
@@ -170,6 +185,7 @@ for s = 1, screen.count() do
         mylayoutbox[s],
         mytextclock,
         kbdcfg.widget,
+        batterywidget,
         (s == 2 or screen.count() == 1) and mysystray or nil,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft,
