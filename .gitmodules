@@ -13,3 +13,6 @@
 [submodule "vim/.vim.symlink/bundle/vim-textobj-user"]
 	path = vim/.vim.symlink/bundle/vim-textobj-user
 	url = git@github.com:kana/vim-textobj-user.git
+[submodule "vim/.vim.symlink/bundle/greplace.vim"]
+	path = vim/.vim.symlink/bundle/greplace.vim
+	url = git@github.com:vim-scripts/greplace.vim.git
