@@ -7,3 +7,6 @@
 [submodule "vim/.vim.symlink/bundle/vim-rvm"]
 	path = vim/.vim.symlink/bundle/vim-rvm
 	url = git@github.com:tpope/vim-rvm.git
+[submodule "vim/.vim.symlink/bundle/vim-textobj-rubyblock"]
+	path = vim/.vim.symlink/bundle/vim-textobj-rubyblock
+	url = git@github.com:nelstrom/vim-textobj-rubyblock.git
