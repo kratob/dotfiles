@@ -20,6 +20,8 @@ terminal = "gnome-terminal"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
+single_screen = (screen.count() == 1)
+
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -49,10 +51,16 @@ layouts =
 -- Define a tag table which hold all screen tags.
 tags = {}
 for s = 1, screen.count() do
-    -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[2])
+    if single_screen then
+      -- Each screen has its own tag table.
+      tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9, "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10", "f11", "f12"}, s, layouts[2])
+    else
+      tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9}, s, layouts[2])
+    end
 end
 -- }}}
+
+
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
@@ -184,8 +192,6 @@ for s = 1, screen.count() do
         },
         mylayoutbox[s],
         mytextclock,
-        kbdcfg.widget,
-        batterywidget,
         (s == 2 or screen.count() == 1) and mysystray or nil,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft,
@@ -310,6 +316,39 @@ for i = 1, keynumber do
                       end
                   end))
 end
+
+if single_screen then
+  for i = 1, 12 do
+      globalkeys = awful.util.table.join(globalkeys,
+          awful.key({ modkey }, "F" .. i,
+                    function ()
+                          local screen = mouse.screen
+                          if tags[screen][i + keynumber] then
+                              awful.tag.viewonly(tags[screen][i + keynumber])
+                          end
+                    end),
+          awful.key({ modkey, "Control" }, "F" .. i,
+                    function ()
+                        local screen = mouse.screen
+                        if tags[screen][i + keynumber] then
+                            awful.tag.viewtoggle(tags[screen][i + keynumber])
+                        end
+                    end),
+          awful.key({ modkey, "Shift" }, "F" .. i,
+                    function ()
+                        if client.focus and tags[client.focus.screen][i + keynumber] then
+                            awful.client.movetotag(tags[client.focus.screen][i + keynumber])
+                        end
+                    end),
+          awful.key({ modkey, "Control", "Shift" }, "F" .. i,
+                    function ()
+                        if client.focus and tags[client.focus.screen][i + keynumber] then
+                            awful.client.toggletag(tags[client.focus.screen][i + keynumber])
+                        end
+                    end))
+  end
+end
+
 
 clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
