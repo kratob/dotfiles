@@ -1,4 +1,4 @@
-bindkey -v
+bindkey -e
 
 source ~/.zkbd/$TERM
 [[ -n ${key[Left]} ]] && bindkey "${key[Left]}" backward-char
