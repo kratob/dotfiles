@@ -47,14 +47,10 @@ augroup filetypedetect
 au BufNewFile,BufRead *.asy setf asy
 augroup end
 
-autocmd User BufEnterRails normal ,vyu
-
 au FocusLost * silent! wa
 
 set wildignore+=*.png,*.jpg,*.gif,public/system/**,*.sassc
-map <C-F> :CommandT<CR>
-
-let g:fuzzy_ignore = "*.png,*.jpg,*.gif,vendor/**/*"
+let g:ctrlp_map = '<C-F>'
 
 digraph ,, 8222
 digraph '' 8220
@@ -70,8 +66,7 @@ let g:EasyGrepRecursive=1
 let g:EasyGrepAllOptionsInExplorer=1
 let g:EasyGrepIgnoreCase=1
 let g:EasyGrepCurrentBufferDir=0
-let g:sparkupNextMapping = '<leader><c-e>'
-let g:CommandTMaxFiles=50000
+let g:EasyGrepFilesToExclude="*.git,*.log,*.jpg,*.png,*.db,vendor*,tmp*"
 
 let g:utl_cfg_hdl_mt_generic = 'silent !xdg-open %u'
 

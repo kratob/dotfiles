@@ -31,3 +31,9 @@
 [submodule "vim/.vim.symlink/bundle/netrw.vim"]
 	path = vim/.vim.symlink/bundle/netrw.vim
 	url = git@github.com:vim-scripts/netrw.vim.git
+[submodule "vim/.vim.symlink/bundle/ctrlp.vim"]
+	path = vim/.vim.symlink/bundle/ctrlp.vim
+	url = git@github.com:kien/ctrlp.vim.git
+[submodule "vim/.vim.symlink/bundle/vim-easygrep"]
+	path = vim/.vim.symlink/bundle/vim-easygrep
+	url = git@github.com:dkprice/vim-easygrep.git
