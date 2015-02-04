@@ -51,6 +51,7 @@ au FocusLost * silent! wa
 
 set wildignore+=*.png,*.jpg,*.gif,public/system/**,*.sassc
 let g:ctrlp_map = '<C-F>'
+let g:ctrlp_match_window='bottom,order:ttb,min:1,max:20'
 
 digraph ,, 8222
 digraph '' 8220
@@ -66,7 +67,7 @@ let g:EasyGrepRecursive=1
 let g:EasyGrepAllOptionsInExplorer=1
 let g:EasyGrepIgnoreCase=1
 let g:EasyGrepCurrentBufferDir=0
-let g:EasyGrepFilesToExclude="*.git,*.log,*.jpg,*.png,*.db,vendor*,tmp*"
+let g:EasyGrepFilesToExclude="*.git,*.log,*.jpg,*.png,*.db,vendor*,tmp*,public*"
 
 let g:utl_cfg_hdl_mt_generic = 'silent !xdg-open %u'
 
