@@ -37,3 +37,9 @@
 [submodule "vim/.vim.symlink/bundle/vim-easygrep"]
 	path = vim/.vim.symlink/bundle/vim-easygrep
 	url = git@github.com:dkprice/vim-easygrep.git
+[submodule "matcher"]
+	path = matcher
+	url = https://github.com/burke/matcher.git
+[submodule "vim/.vim.symlink/bundle/vim-markdown"]
+	path = vim/.vim.symlink/bundle/vim-markdown
+	url = https://github.com/tpope/vim-markdown.git

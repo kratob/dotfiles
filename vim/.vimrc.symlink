@@ -30,9 +30,9 @@ set history=500
 set showbreak=↳\ 
 
 let mapleader = ","
-inoremap jj <ESC>
 
 
+" Tex
 let g:tex_flavor = "latex"
 filetype plugin on
 filetype indent on
@@ -40,74 +40,45 @@ colorscheme mod_tcsoft
 let g:Tex_ViewRule_dvi = 'yap -1'
 let g:Tex_CompileRule_dvi = 'latex -interaction=nonstopmode -src-specials $*'
 
-let g:ruby_debugger_spec_path = 'script/spec'
-let g:ruby_debugger_cucumber_path = 'script/cucumber'
 
-augroup filetypedetect
-au BufNewFile,BufRead *.asy setf asy
-augroup end
-
+" Save on focus loss
 au FocusLost * silent! wa
 
-set wildignore+=*.png,*.jpg,*.gif,public/system/**,*.sassc
-let g:ctrlp_map = '<C-F>'
-let g:ctrlp_match_window='bottom,order:ttb,min:1,max:20'
 
-digraph ,, 8222
-digraph '' 8220
-digraph 66 8220
-digraph 99 8221
-digraph ~~ 0160
-digraph .. 8230
 
+" Some digraphs
+digraph ,, 8222  " „
+digraph '' 8220  " “
+digraph 66 8220  " “
+digraph 99 8221  " ”
+digraph ~~ 0160  " <nbsp>
+digraph .. 8230  " …
+
+
+
+" EasyGrep
 
 let g:EasyGrepMode=0
 let g:EasyGrepCommand=1
-let g:EasyGrepRecursive=1
+let g:EasyGrepRecursive=0
 let g:EasyGrepAllOptionsInExplorer=1
 let g:EasyGrepIgnoreCase=1
 let g:EasyGrepCurrentBufferDir=0
-let g:EasyGrepFilesToExclude="*.git,*.log,*.jpg,*.png,*.db,vendor*,tmp*,public*"
 
-let g:utl_cfg_hdl_mt_generic = 'silent !xdg-open %u'
+
+" disable annoying shortcuts
+map <C-W>o <Nop>
+map <C-W><C-O> <Nop>
+
+
+
+" Some ruby settings
 
 autocmd Syntax * syn match Nbsp / / containedin=ALL
 autocmd Syntax * syn match Nbsp /\s\+$\| \+\ze\t/ containedin=ALL
 
 
-ab destionation destination
-ab Destionation Destination
-
-
-function! RubyEval(code, ...)
-  let fullcode = 'ruby argv = VIM::evaluate("a:000"); retval = begin ' . a:code . ' end; VIM::command("let l:retval=\"#{retval}\"")'
-  execute fullcode
-  return retval
-endfunction
-
-function! RubyClassifyFile()
-  return RubyClassify(expand('%'))
-endfunction
-
-function! RubyClassify(file)
-  return RubyEval('require %{rubygems}; require %{active_support}; require %{active_support/inflector}; ActiveSupport::Inflector.classify((argv.first.split(%r{[/.]}) - %w[app models controllers spec rb]).join(%{/}).gsub(/_spec/,""))', a:file)
-endfunction
-
-function! WhenNotDefault(given, default, alternative)
-  if a:given == a:default
-    return a:alternative
-  else
-    return a:given
-  endif
-endfunction
-map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
 au BufNewFile,BufRead *.feature execute "AlignCtrl =p01111111111111111111111111P1 |"
-
-"autocmd FileType ruby,sass autocmd BufWritePre <buffer> :%s/\s\+$//e
-
-let g:ruby_debugger_debug_mode=1
-
 
 augroup rubypath
   autocmd!
@@ -116,4 +87,55 @@ augroup rubypath
   autocmd FileType ruby setlocal path+=app/models/shared
 augroup END
 
+
+
 runtime macros/matchit.vim
+
+
+" The Silver Searcher
+"
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+
+
+" Ctrl-P
+
+let g:ctrlp_map = '<C-F>'
+let g:ctrlp_match_window='bottom,order:ttb,min:1,max:20'
+
+
+if executable('matcher')
+    let g:ctrlp_match_func = { 'match': 'GoodMatch' }
+
+    function! GoodMatch(items, str, limit, mmode, ispath, crfile, regex)
+
+      " Create a cache file if not yet exists
+      let cachefile = ctrlp#utils#cachedir().'/matcher.cache'
+      if !( filereadable(cachefile) && a:items == readfile(cachefile) )
+        call writefile(a:items, cachefile)
+      endif
+      if !filereadable(cachefile)
+        return []
+      endif
+
+      " a:mmode is currently ignored. In the future, we should probably do
+      " something about that. the matcher behaves like "full-line".
+      let cmd = 'matcher --limit '.a:limit.' --manifest '.cachefile.' '
+      if !( exists('g:ctrlp_dotfiles') && g:ctrlp_dotfiles )
+        let cmd = cmd.'--no-dotfiles '
+      endif
+      let cmd = cmd.a:str
+
+      return split(system(cmd), "\n")
+
+    endfunction
+end
