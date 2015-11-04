@@ -1,1 +1,8 @@
 #require 'capistrano_colors'
+
+
+task :fix_remote_cache, :role => :app do
+  if fetch(:deploy_via) == :remote_cache
+    run "cd #{shared_path}/cached-copy; git remote set-url origin #{fetch(:repository)}"
+  end
+end
