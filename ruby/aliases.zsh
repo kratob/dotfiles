@@ -18,3 +18,5 @@ alias rp='_rails_command plugin'
 alias devlog='tail -f log/development.log'
 alias rrs='touch tmp/restart.txt'
 
+alias g='geordi'
+
