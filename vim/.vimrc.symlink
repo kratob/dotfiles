@@ -65,6 +65,8 @@ let g:EasyGrepAllOptionsInExplorer=1
 let g:EasyGrepIgnoreCase=1
 let g:EasyGrepCurrentBufferDir=0
 
+set wildignore+=*.png,*.jpg,*.gif,public/system/**,*.sassc,**/node_modules/**,dumps/**
+
 
 " disable annoying shortcuts
 map <C-W>o <Nop>
