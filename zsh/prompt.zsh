@@ -107,7 +107,7 @@ caret() {
 export PROMPT=$'\n$(directory_name) $(git_prompt) $(need_push)\n$(caret) '
 
 set_prompt(){
-  export RPROMPT="%{$fg[green]%}$(rvm-prompt 2>/dev/null)%{$reset_color%}"
+  export RPROMPT="%{$fg[green]%}$(ruby -v 2>/dev/null| sed -e "s/ruby //" -e "s/p.*//")%{$reset_color%}"
 }
 
 precmd() {
