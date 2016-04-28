@@ -1,12 +1,15 @@
 
 -- Standard awesome library
-require("awful")
+local awful = require("awful")
+awful.rules = require("awful.rules")
 require("awful.autofocus")
-require("awful.rules")
 -- Theme handling library
-require("beautiful")
+local beautiful = require("beautiful")
 -- Notification library
-require("naughty")
+local naughty = require("naughty")
+
+local wibox = require("wibox")
+
 
 -- Load Debian menu entries
 -- require("debian.menu")
@@ -16,7 +19,7 @@ require("naughty")
 beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "gnome-terminal"
+terminal = "mate-terminal"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -76,36 +79,17 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                   }
                         })
 
-mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
+mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
 -- }}}
 
 
- -- Keyboard map indicator and changer
-kbdcfg = {}
-kbdcfg.cmd = "setxkbmap"
-kbdcfg.layout = { { "de", "nodeadkeys" }, { "dvorak", "" } }
-kbdcfg.current = 1  -- de is our default layout
-kbdcfg.widget = widget({ type = "textbox", align = "right" })
-kbdcfg.widget.text = " " .. kbdcfg.layout[kbdcfg.current][1] .. " "
-kbdcfg.switch = function ()
-   kbdcfg.current = kbdcfg.current % #(kbdcfg.layout) + 1
-   local t = kbdcfg.layout[kbdcfg.current]
-   kbdcfg.widget.text = " " .. t[1] .. " "
-   os.execute( kbdcfg.cmd .. " " .. t[1] .. " " .. t[2] )
-end
-
--- Mouse bindings
-kbdcfg.widget:buttons(awful.util.table.join(
-    awful.button({ }, 1, function () kbdcfg.switch() end)
-))
-
 
 -- Create an ACPI widget
-batterywidget = widget({ type = "textbox" })
+batterywidget = wibox.widget.textbox()
 batterywidget.text = " | Battery | "
 batterywidgettimer = timer({ timeout = 5 })
-batterywidgettimer:add_signal("timeout",
+batterywidgettimer:connect_signal("timeout",
   function()
     fh = assert(io.popen("acpi | cut -d, -f 2,3 -", "r"))
     batterywidget.text = " |" .. fh:read("*l") .. " | "
@@ -117,10 +101,10 @@ batterywidgettimer:start()
 
 -- {{{ Wibox
 -- Create a textclock widget
-mytextclock = awful.widget.textclock({ align = "right" })
+mytextclock = awful.widget.textclock()
 
 -- Create a systray
-mysystray = widget({ type = "systray" })
+mysystray = wibox.widget.systray()
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -163,7 +147,7 @@ mytasklist.buttons = awful.util.table.join(
 
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
-    mypromptbox[s] = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
+    mypromptbox[s] = awful.widget.prompt()
     -- Create an imagebox widget which will contains an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     mylayoutbox[s] = awful.widget.layoutbox(s)
@@ -173,29 +157,31 @@ for s = 1, screen.count() do
                            awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
     -- Create a taglist widget
-    mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.label.all, mytaglist.buttons)
+    mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
 
     -- Create a tasklist widget
-    mytasklist[s] = awful.widget.tasklist(function(c)
-                                              return awful.widget.tasklist.label.currenttags(c, s)
-                                          end, mytasklist.buttons)
+    mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
     -- Create the wibox
     mywibox[s] = awful.wibox({ position = "top", screen = s })
-    -- Add widgets to the wibox - order matters
-    mywibox[s].widgets = {
-        {
-            mylauncher,
-            mytaglist[s],
-            mypromptbox[s],
-            layout = awful.widget.layout.horizontal.leftright
-        },
-        mylayoutbox[s],
-        mytextclock,
-        (s == 2 or screen.count() == 1) and mysystray or nil,
-        mytasklist[s],
-        layout = awful.widget.layout.horizontal.rightleft,
-    }
+
+       -- Widgets that are aligned to the left
+    local left_layout = wibox.layout.fixed.horizontal()
+    left_layout:add(mylauncher)
+    left_layout:add(mytaglist[s])
+    left_layout:add(mypromptbox[s])
+
+    local right_layout = wibox.layout.fixed.horizontal()
+    if s == 1 then right_layout:add(wibox.widget.systray()) end
+    right_layout:add(mytextclock)
+    right_layout:add(mylayoutbox[s])
+
+    local layout = wibox.layout.align.horizontal()
+    layout:set_left(left_layout)
+    layout:set_middle(mytasklist[s])
+    layout:set_right(right_layout)
+
+    mywibox[s]:set_widget(layout)
 end
 -- }}}
 
@@ -256,10 +242,8 @@ globalkeys = awful.util.table.join(
                   mypromptbox[mouse.screen].widget,
                   awful.util.eval, nil,
                   awful.util.getdir("cache") .. "/history_eval")
-              end),
+              end)
 
-   -- Keyboard
-   awful.key({ modkey, "Shift" }, "a", function () kbdcfg.switch() end)
 )
 
 clientkeys = awful.util.table.join(
@@ -363,9 +347,9 @@ root.keys(globalkeys)
 awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
-      properties = { border_width = "2",
+      properties = { border_width = 2,
                      border_color = beautiful.border_normal,
-                     focus = true,
+                     focus = awful.client.focus.filter,
                      keys = clientkeys,
                      buttons = clientbuttons } },
     { rule = { class = "MPlayer" },
@@ -385,19 +369,19 @@ awful.rules.rules = {
 
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
-client.add_signal("manage", function (c, startup)
+client.connect_signal("manage", function (c, startup)
     -- Add a titlebar
     -- awful.titlebar.add(c, { modkey = modkey })
 
     -- Enable sloppy focus
-    c:add_signal("mouse::enter", function(c)
+    c:connect_signal("mouse::enter", function(c)
         if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
             and awful.client.focus.filter(c) then
             client.focus = c
         end
     end)
 
-    c:add_signal("property::urgent", function(c)
+    c:connect_signal("property::urgent", function(c)
       if c.urgent then
         -- Change the border color of the urgent window.
         -- You'll need to define the color in your theme.lua, e.g.
@@ -423,6 +407,6 @@ client.add_signal("manage", function (c, startup)
     end
 end)
 
-client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
-client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
+client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
