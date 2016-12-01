@@ -360,6 +360,7 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "Skype" }, properties = {}, callback = awful.client.setslave },
     { rule = { class = "Gnome-panel" }, properties = { ontop = true } },
+    { rule = { class = "Mate-panel" }, properties = { ontop = true, focusable = false } },
     { rule = { class = "epiphany" }, properties = { floating = false } },
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
