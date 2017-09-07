@@ -1,2 +1,0 @@
-#!/bin/sh
-ctags-exuberant -f tmp/tags --exclude=facebox.js --exclude="*.*.js" --langmap="ruby:+.rake.builder.rjs" -R .
