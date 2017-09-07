@@ -28,6 +28,9 @@ set undofile
 set wildmenu
 set history=500
 set showbreak=↳\ 
+set noballooneval
+set breakindent
+set mousefocus
 
 let mapleader = ","
 
@@ -87,6 +90,7 @@ augroup rubypath
 
   autocmd FileType ruby setlocal suffixesadd+=_trait.rb
   autocmd FileType ruby setlocal path+=app/models/shared
+  autocmd FileType ruby setlocal balloonexpr=
 augroup END
 
 
@@ -143,6 +147,15 @@ if executable('matcher')
 end
 
 set colorcolumn=100
+
+
+set statusline=%f\ %h%w%m%r\
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+set statusline+=%=%(%l,%c%V\ %=\ %P%)
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
