@@ -1,10 +1,10 @@
-# Rails 3 aliases, backwards-compatible with Rails 2.
-
 function _rails_command () {
   if [ -e "script/server" ]; then
     ruby script/$@
+  elif [ -e "bin/rails" ]; then
+    bin/rails $@
   else
-    ruby script/rails $@
+    script/rails $@
   fi
 }
 
