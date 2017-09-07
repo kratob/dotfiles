@@ -1,0 +1,2 @@
+--regex-ruby=/(^|;)[ \t]*(class|module)[ \t]+([A-Z][[:alnum:]_]+::)*([A-Z][[:alnum:]_]+)/\4/c,class,constant/
+

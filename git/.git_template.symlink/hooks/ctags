@@ -2,5 +2,6 @@
 set -e
 PATH="/usr/local/bin:$PATH"
 trap "rm -f .git/tags.$$" EXIT
-ripper-tags --tag-relative -Rf.git/tags.$$ --exclude=.git
+git ls-files | \
+  ctags --tag-relative -L - -f".git/tags.$$" --languages=-javascript,sql
 mv .git/tags.$$ .git/tags
