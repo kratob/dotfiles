@@ -26,3 +26,5 @@ export NVM_DIR="/home/tobias/.nvm"
 PATH=$HOME/.rbenv/bin:$PATH # Add rbenv to PATH for scripting
 
 eval "$(rbenv init -)"
+
+PATH=./bin:$PATH
