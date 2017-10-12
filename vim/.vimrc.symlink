@@ -30,7 +30,6 @@ set history=500
 set showbreak=↳\ 
 set noballooneval
 set breakindent
-set mousefocus
 
 let mapleader = ","
 
