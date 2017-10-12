@@ -12,7 +12,7 @@ set encoding=utf-8
 set expandtab
 set fileformats=unix,dos
 set grepprg=grep\ -nR\ $*\ /dev/null
-set guifont=Source\ Code\ Pro\ Medium\ 11
+set guifont=Consolas\ 12
 set guioptions-=T
 set ignorecase
 set scrolloff=2
