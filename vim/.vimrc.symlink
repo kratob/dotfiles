@@ -55,6 +55,7 @@ digraph 66 8220  " “
 digraph 99 8221  " ”
 digraph ~~ 0160  " <nbsp>
 digraph .. 8230  " …
+digraph -~ 8209  " ‑
 
 
 
@@ -79,6 +80,7 @@ map <C-W><C-O> <Nop>
 " Some ruby settings
 
 autocmd Syntax * syn match Nbsp / / containedin=ALL
+autocmd Syntax * syn match Nbsp /‑/ containedin=ALL
 autocmd Syntax * syn match Nbsp /\s\+$\| \+\ze\t/ containedin=ALL
 
 
