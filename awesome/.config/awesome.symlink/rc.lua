@@ -350,6 +350,7 @@ awful.rules.rules = {
     { rule = { class = "Gnome-panel" }, properties = { ontop = true } },
     { rule = { class = "Mate-panel" }, properties = { ontop = true } },
     { rule = { class = "epiphany" }, properties = { floating = false } },
+    { rule = { name = "Slack Call Minipanel" }, properties = { floating = true, ontop = true } },
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
