@@ -161,8 +161,6 @@ if executable('matcher')
     endfunction
 end
 
-set colorcolumn=100
-
 
 set statusline=%f\ %h%w%m%r\
 
