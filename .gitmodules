@@ -49,3 +49,6 @@
 [submodule "vim/.vim.symlink/bundle/syntastic"]
 	path = vim/.vim.symlink/bundle/syntastic
 	url = https://github.com/vim-syntastic/syntastic.git
+[submodule "vim/.vim.symlink/bundle/neosnippet.vim"]
+	path = vim/.vim.symlink/bundle/neosnippet.vim
+	url = https://github.com/Shougo/neosnippet.vim.git
