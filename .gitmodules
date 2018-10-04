@@ -55,3 +55,6 @@
 [submodule "vim/.vim.symlink/bundle/vim-lsp"]
 	path = vim/.vim.symlink/bundle/vim-lsp
 	url = https://github.com/prabirshrestha/vim-lsp.git
+[submodule "vim/.vim.symlink/bundle/async.vim"]
+	path = vim/.vim.symlink/bundle/async.vim
+	url = https://github.com/prabirshrestha/async.vim.git
