@@ -28,5 +28,3 @@ then
 fi
 
 PATH=./bin:$PATH
-
-[[ -s "/home/tobias/.rvm/scripts/rvm" ]] && source "/home/tobias/.rvm/scripts/rvm"
