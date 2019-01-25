@@ -398,3 +398,5 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+os.execute("flock -n /tmp/redshift.lock redshift-gtk -l 48.3:10.9 -t 5700:4800 &")
