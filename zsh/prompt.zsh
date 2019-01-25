@@ -100,11 +100,19 @@ directory_name(){
   echo "%{$fg_bold[magenta]%}${PWD/#$HOME/~}%{$reset_color%}"
 }
 
+host_if_remote() {
+  if [[ -n $SSH_CLIENT ]];
+  then
+    hostname=$(hostname)
+    echo "%{$fg_bold[green]%}$hostname%{$reset_color%} "
+  fi
+}
+
 caret() {
   echo "%(?..%{$fg[red]%})›%{$reset_color%}"
 }
 
-export PROMPT=$'\n$(directory_name) $(git_prompt) $(need_push)\n$(caret) '
+export PROMPT=$'\n$(host_if_remote)$(directory_name) $(git_prompt) $(need_push)\n$(caret) '
 
 set_prompt(){
   export RPROMPT="%{$fg[green]%}$(ruby -v 2>/dev/null| sed -e "s/ruby //" -e "s/p.*//")%{$reset_color%}"
