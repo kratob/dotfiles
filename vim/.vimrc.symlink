@@ -184,3 +184,24 @@ let g:neosnippet#disable_runtime_snippets = {
       \   '_' : 1,
       \ }
 let g:neosnippet#snippets_directory='~/.vim/snippets'
+
+
+" ALE
+
+
+augroup elixir
+  autocmd FileType elixir nnoremap <c-]> :ALEGoToDefinition<cr>
+augroup END
+
+let g:ale_linters = {}
+let g:ale_linters.elixir = ['elixir-ls']
+let g:ale_linters.crystal = ['crystal']
+let g:ale_linters_explicit = 1
+
+
+let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
+let g:ale_fixers.elixir = ['mix_format']
+
+let g:ale_elixir_elixir_ls_release = '/home/tobias/src/elixir-ls/rel'
+
+let g:ale_lint_on_text_changed = 'never'
