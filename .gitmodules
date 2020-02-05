@@ -64,3 +64,6 @@
 [submodule "vim/.vim.symlink/bundle/ale"]
 	path = vim/.vim.symlink/bundle/ale
 	url = https://github.com/w0rp/ale.git
+[submodule "vim/.vim.symlink/bundle/fzf.vim"]
+	path = vim/.vim.symlink/bundle/fzf.vim
+	url = https://github.com/junegunn/fzf.vim.git

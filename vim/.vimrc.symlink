@@ -128,12 +128,6 @@ endif
 
 
 
-" Ctrl-P
-
-let g:ctrlp_map = '<C-F>'
-let g:ctrlp_match_window='bottom,order:ttb,min:1,max:20'
-
-
 if executable('matcher')
     let g:ctrlp_match_func = { 'match': 'GoodMatch' }
 
@@ -184,6 +178,14 @@ let g:neosnippet#disable_runtime_snippets = {
       \   '_' : 1,
       \ }
 let g:neosnippet#snippets_directory='~/.vim/snippets'
+
+" FZF
+
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+source /usr/share/doc/fzf/examples/fzf.vim
+
+nmap <C-F> :Files<CR>
+
 
 
 " ALE
