@@ -158,7 +158,7 @@ for s = 1, screen.count() do
     left_layout:add(mypromptbox[s])
 
     local right_layout = wibox.layout.fixed.horizontal()
-    if s == 3 then right_layout:add(wibox.widget.systray()) end
+    if s == screen.count() then right_layout:add(wibox.widget.systray()) end
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
@@ -346,7 +346,7 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "Skype" }, properties = {}, callback = awful.client.setslave },
     { rule = { class = "Gnome-panel" }, properties = { ontop = true } },
-    { rule = { class = "Mate-panel" }, properties = { ontop = true } },
+    { rule = { class = "Mate-panel" }, properties = { ontop = true, focusable = false, height = 21, width = 300, x = 500, y = 0 } },
     { rule = { class = "epiphany" }, properties = { floating = false } },
     { rule = { name = "Slack Call Minipanel" }, properties = { floating = true, ontop = true } },
     -- Set Firefox to always map on tags number 2 of screen 1.
