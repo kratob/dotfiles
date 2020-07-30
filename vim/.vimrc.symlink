@@ -170,15 +170,6 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
 
-imap <C-l>     <Plug>(neosnippet_expand_or_jump)
-smap <C-l>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-l>     <Plug>(neosnippet_expand_target)
-
-let g:neosnippet#disable_runtime_snippets = {
-      \   '_' : 1,
-      \ }
-let g:neosnippet#snippets_directory='~/.vim/snippets'
-
 " FZF
 
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
