@@ -1,9 +1,17 @@
 execute pathogen#infect()
 
 set nocompatible
-source $VIMRUNTIME/vimrc_example.vim
-source $VIMRUNTIME/mswin.vim
+"source $VIMRUNTIME/vimrc_example.vim
+"source $VIMRUNTIME/mswin.vim
 behave mswin
+
+set backup
+set hlsearch
+set ruler
+set showcmd
+set incsearch
+
+
 
 set autowriteall
 set backupdir=~/.temp
@@ -28,19 +36,109 @@ set undofile
 set wildmenu
 set history=500
 set showbreak=↳\ 
-set noballooneval
 set breakindent
+set backupcopy=yes
+
+if !has('nvim')
+  set noballooneval
+end
 
 let mapleader = ","
 
+" Windows behavior
+if has("clipboard")
+    " CTRL-X and SHIFT-Del are Cut
+    vnoremap <C-X> "+x
+    vnoremap <S-Del> "+x
 
-" Tex
-let g:tex_flavor = "latex"
-filetype plugin on
-filetype indent on
-colorscheme mod_tcsoft
-let g:Tex_ViewRule_dvi = 'yap -1'
-let g:Tex_CompileRule_dvi = 'latex -interaction=nonstopmode -src-specials $*'
+    " CTRL-C and CTRL-Insert are Copy
+    vnoremap <C-C> "+y
+    vnoremap <C-Insert> "+y
+
+    " CTRL-V and SHIFT-Insert are Paste
+    map <C-V>		"+gP
+    map <S-Insert>		"+gP
+
+    cmap <C-V>		<C-R>+
+    cmap <S-Insert>		<C-R>+
+endif
+
+" Pasting blockwise and linewise selections is not possible in Insert and
+" Visual mode without the +virtualedit feature.  They are pasted as if they
+" were characterwise instead.
+" Uses the paste.vim autoload script.
+" Use CTRL-G u to have CTRL-Z only undo the paste.
+
+if 1
+    exe 'inoremap <script> <C-V> <C-G>u' . paste#paste_cmd['i']
+    exe 'vnoremap <script> <C-V> ' . paste#paste_cmd['v']
+endif
+
+imap <S-Insert>		<C-V>
+vmap <S-Insert>		<C-V>
+
+" Use CTRL-Q to do what CTRL-V used to do
+noremap <C-Q>		<C-V>
+
+" Use CTRL-S for saving, also in Insert mode (<C-O> doesn't work well when
+" using completions).
+noremap <C-S>		:update<CR>
+vnoremap <C-S>		<C-C>:update<CR>
+inoremap <C-S>		<Esc>:update<CR>gi
+
+" For CTRL-V to work autoselect must be off.
+" On Unix we have two selections, autoselect can be used.
+if !has("unix")
+  set guioptions-=a
+endif
+
+" CTRL-Z is Undo; not in cmdline though
+noremap <C-Z> u
+inoremap <C-Z> <C-O>u
+
+" CTRL-Y is Redo (although not repeat); not in cmdline though
+noremap <C-Y> <C-R>
+inoremap <C-Y> <C-O><C-R>
+
+" Alt-Space is System menu
+if has("gui")
+  noremap <M-Space> :simalt ~<CR>
+  inoremap <M-Space> <C-O>:simalt ~<CR>
+  cnoremap <M-Space> <C-C>:simalt ~<CR>
+endif
+
+" CTRL-A is Select all
+noremap <C-A> gggH<C-O>G
+inoremap <C-A> <C-O>gg<C-O>gH<C-O>G
+cnoremap <C-A> <C-C>gggH<C-O>G
+onoremap <C-A> <C-C>gggH<C-O>G
+snoremap <C-A> <C-C>gggH<C-O>G
+xnoremap <C-A> <C-C>ggVG
+
+" CTRL-Tab is Next window
+noremap <C-Tab> <C-W>w
+inoremap <C-Tab> <C-O><C-W>w
+cnoremap <C-Tab> <C-C><C-W>w
+onoremap <C-Tab> <C-C><C-W>w
+
+" CTRL-F4 is Close window
+noremap <C-F4> <C-W>c
+inoremap <C-F4> <C-O><C-W>c
+cnoremap <C-F4> <C-C><C-W>c
+onoremap <C-F4> <C-C><C-W>c
+
+if has("gui")
+  " CTRL-F is the search dialog
+  noremap  <expr> <C-F> has("gui_running") ? ":promptfind\<CR>" : "/"
+  inoremap <expr> <C-F> has("gui_running") ? "\<C-\>\<C-O>:promptfind\<CR>" : "\<C-\>\<C-O>/"
+  cnoremap <expr> <C-F> has("gui_running") ? "\<C-\>\<C-C>:promptfind\<CR>" : "\<C-\>\<C-O>/"
+
+  " CTRL-H is the replace dialog,
+  " but in console, it might be backspace, so don't map it there
+  nnoremap <expr> <C-H> has("gui_running") ? ":promptrepl\<CR>" : "\<C-H>"
+  inoremap <expr> <C-H> has("gui_running") ? "\<C-\>\<C-O>:promptrepl\<CR>" : "\<C-H>"
+  cnoremap <expr> <C-H> has("gui_running") ? "\<C-\>\<C-C>:promptrepl\<CR>" : "\<C-H>"
+endif
 
 
 " Save on focus loss
@@ -79,10 +177,6 @@ map <C-W><C-O> <Nop>
 
 " Some ruby settings
 
-autocmd Syntax * syn match Nbsp / / containedin=ALL
-autocmd Syntax * syn match Nbsp /‑/ containedin=ALL
-autocmd Syntax * syn match Nbsp /\s\+$\| \+\ze\t/ containedin=ALL
-
 
 au BufNewFile,BufRead *.feature execute "AlignCtrl =p01111111111111111111111111P1 |"
 
@@ -91,7 +185,10 @@ augroup rubypath
 
   autocmd FileType ruby setlocal suffixesadd+=_trait.rb
   autocmd FileType ruby setlocal path+=app/models/shared
-  autocmd FileType ruby setlocal balloonexpr=
+
+  if !has('nvim')
+    autocmd FileType ruby setlocal balloonexpr=
+  end
 augroup END
 
 augroup elixir_lsp
@@ -198,3 +295,52 @@ let g:ale_fixers.elixir = ['mix_format']
 let g:ale_elixir_elixir_ls_release = '/home/tobias/src/elixir-ls/rel'
 
 let g:ale_lint_on_text_changed = 'never'
+
+" AIRLINE
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.colnr = ' :'
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ' :'
+let g:airline_symbols.maxlinenr = '☰ '
+let g:airline_symbols.dirty='⚡'
+
+let g:airline_section_y = ''
+let g:airline_section_z = '%3p%%%#__accent_bold# %3l/%L%#__restore__#%#__accent_bold# :%3v%#__restore__#'
+
+
+" Colorscheme overrides
+
+augroup TenderColorOverrides
+  autocmd!
+  autocmd ColorScheme tender highlight Nbsp guifg=#f43753 gui=undercurl
+                         \ | highlight VertSplit guifg=#666666 ctermfg=235 guibg=#282828 ctermbg=235 gui=NONE cterm=NONE
+                         \ | highlight NonText guifg=#555555 ctermfg=238 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+                         \ | highlight Comment guifg=#666666 ctermfg=242 guibg=NONE ctermbg=NONE gui=Italic cterm=NONE
+augroup END
+
+function! SynGroup()
+    let l:s = synID(line('.'), col('.'), 1)
+    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+endfun
+
+
+" Nbsp highlighting
+
+augroup nbsp
+  autocmd!
+
+  autocmd BufEnter * syn match Nbsp /\%xA0/ containedin=ALL
+  autocmd BufEnter * syn match Nbsp /‑/ containedin=ALL
+  autocmd BufEnter * syn match Nbsp /\s\+$\| \+\ze\t/ containedin=ALL
+augroup END
+

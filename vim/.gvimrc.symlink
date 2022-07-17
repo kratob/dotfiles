@@ -1,3 +1,5 @@
 set background=dark
 set cursorline
-colorscheme Atelier_PlateauDark
+colorscheme tender
+let g:airline_theme='tender'
+" colorscheme palenight
