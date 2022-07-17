@@ -18,9 +18,6 @@ fi
 autoload -U compinit
 compinit
 
-export NVM_DIR="/home/tobias/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
 if [[ -x $HOME/.rbenv/bin/rbenv ]]
 then
   PATH=$HOME/.rbenv/bin:$PATH # Add rbenv to PATH for scripting
