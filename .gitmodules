@@ -67,3 +67,6 @@
 [submodule "vim/.vim.symlink/bundle/tender.vim"]
 	path = vim/.vim.symlink/bundle/tender.vim
 	url = https://github.com/jacoborus/tender.vim.git
+[submodule "vim/.vim.symlink/bundle/vim-airline"]
+	path = vim/.vim.symlink/bundle/vim-airline
+	url = https://github.com/vim-airline/vim-airline.git
