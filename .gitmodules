@@ -64,3 +64,6 @@
 [submodule "vim/.vim.symlink/bundle/fzf.vim"]
 	path = vim/.vim.symlink/bundle/fzf.vim
 	url = https://github.com/junegunn/fzf.vim.git
+[submodule "vim/.vim.symlink/bundle/tender.vim"]
+	path = vim/.vim.symlink/bundle/tender.vim
+	url = https://github.com/jacoborus/tender.vim.git
