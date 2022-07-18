@@ -38,6 +38,7 @@ set history=500
 set showbreak=↳\ 
 set breakindent
 set backupcopy=yes
+set title
 
 if !has('nvim')
   set noballooneval
