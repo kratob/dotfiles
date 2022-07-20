@@ -197,21 +197,6 @@ augroup rubypath
   end
 augroup END
 
-augroup elixir_lsp
-  au!
-  au User lsp_setup call lsp#register_server({
-      \ 'name': 'elixir-ls',
-      \ 'cmd': {server_info->[&shell, &shellcmdflag, '~/elixir-ls/language_server.sh']},
-      \ 'whitelist': ['elixir', 'eelixir'],
-      \ })
-  autocmd FileType elixir setlocal omnifunc=lsp#complete
-augroup END
-
-
-let g:lsp_signs_enabled = 1
-let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
-
-
 
 runtime macros/matchit.vim
 
@@ -230,49 +215,6 @@ if executable('ag')
 endif
 
 
-
-if executable('matcher')
-    let g:ctrlp_match_func = { 'match': 'GoodMatch' }
-
-    function! GoodMatch(items, str, limit, mmode, ispath, crfile, regex)
-
-      " Create a cache file if not yet exists
-      let cachefile = ctrlp#utils#cachedir().'/matcher.cache'
-      if !( filereadable(cachefile) && a:items == readfile(cachefile) )
-        call writefile(a:items, cachefile)
-      endif
-      if !filereadable(cachefile)
-        return []
-      endif
-
-      " a:mmode is currently ignored. In the future, we should probably do
-      " something about that. the matcher behaves like "full-line".
-      let cmd = 'matcher --limit '.a:limit.' --manifest '.cachefile.' '
-      if !( exists('g:ctrlp_dotfiles') && g:ctrlp_dotfiles )
-        let cmd = cmd.'--no-dotfiles '
-      endif
-      let cmd = cmd.a:str
-
-      return split(system(cmd), "\n")
-
-    endfunction
-end
-
-
-set statusline=%f\ %h%w%m%r\
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-set statusline+=%=%(%l,%c%V\ %=\ %P%)
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-
-
 " FZF
 
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
@@ -280,27 +222,6 @@ source /usr/share/doc/fzf/examples/fzf.vim
 
 nmap <C-F> :Files<CR>
 
-
-
-" ALE
-
-
-augroup elixir
-  autocmd FileType elixir nnoremap <c-]> :ALEGoToDefinition<cr>
-augroup END
-
-let g:ale_linters = {}
-let g:ale_linters.elixir = ['elixir-ls']
-let g:ale_linters.crystal = ['crystal']
-let g:ale_linters_explicit = 1
-
-
-let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
-let g:ale_fixers.elixir = ['mix_format']
-
-let g:ale_elixir_elixir_ls_release = '/home/tobias/src/elixir-ls/rel'
-
-let g:ale_lint_on_text_changed = 'never'
 
 " AIRLINE
 
@@ -351,3 +272,6 @@ augroup nbsp
   autocmd BufEnter * syn match Nbsp /\s\+$\| \+\ze\t/ containedin=ALL
 augroup END
 
+
+" Tags
+set tags+=\.git/tags
