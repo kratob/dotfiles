@@ -4,9 +4,6 @@
 [submodule "vim/.vim.symlink/bundle/vim-ruby"]
 	path = vim/.vim.symlink/bundle/vim-ruby
 	url = git@github.com:vim-ruby/vim-ruby.git
-[submodule "vim/.vim.symlink/bundle/vim-rvm"]
-	path = vim/.vim.symlink/bundle/vim-rvm
-	url = git@github.com:tpope/vim-rvm.git
 [submodule "vim/.vim.symlink/bundle/vim-textobj-rubyblock"]
 	path = vim/.vim.symlink/bundle/vim-textobj-rubyblock
 	url = git@github.com:nelstrom/vim-textobj-rubyblock.git
@@ -16,51 +13,24 @@
 [submodule "vim/.vim.symlink/bundle/greplace.vim"]
 	path = vim/.vim.symlink/bundle/greplace.vim
 	url = git@github.com:vim-scripts/greplace.vim.git
-[submodule "vim/.vim.symlink/bundle/vim-abolish"]
-	path = vim/.vim.symlink/bundle/vim-abolish
-	url = git@github.com:tpope/vim-abolish.git
 [submodule "vim/.vim.symlink/bundle/vim-bundler"]
 	path = vim/.vim.symlink/bundle/vim-bundler
 	url = git://github.com/tpope/vim-bundler.git
-[submodule "vim/.vim.symlink/bundle/vim-coffee-script"]
-	path = vim/.vim.symlink/bundle/vim-coffee-script
-	url = git@github.com:kchmck/vim-coffee-script.git
 [submodule "vim/.vim.symlink/bundle/vim-fugitive"]
 	path = vim/.vim.symlink/bundle/vim-fugitive
 	url = git://github.com/tpope/vim-fugitive.git
-[submodule "vim/.vim.symlink/bundle/netrw.vim"]
-	path = vim/.vim.symlink/bundle/netrw.vim
-	url = git@github.com:vim-scripts/netrw.vim.git
 [submodule "vim/.vim.symlink/bundle/vim-easygrep"]
 	path = vim/.vim.symlink/bundle/vim-easygrep
 	url = git@github.com:dkprice/vim-easygrep.git
 [submodule "matcher"]
 	path = matcher/matcher
 	url = https://github.com/burke/matcher.git
-[submodule "vim/.vim.symlink/bundle/vim-markdown"]
-	path = vim/.vim.symlink/bundle/vim-markdown
-	url = https://github.com/tpope/vim-markdown.git
-[submodule "vim/.vim.symlink/bundle/vim-instant-markdown"]
-	path = vim/.vim.symlink/bundle/vim-instant-markdown
-	url = https://github.com/suan/vim-instant-markdown.git
-[submodule "vim/.vim.symlink/bundle/syntastic"]
-	path = vim/.vim.symlink/bundle/syntastic
-	url = https://github.com/vim-syntastic/syntastic.git
 [submodule "vim/.vim.symlink/bundle/neosnippet.vim"]
 	path = vim/.vim.symlink/bundle/neosnippet.vim
 	url = https://github.com/Shougo/neosnippet.vim.git
 [submodule "vim/.vim.symlink/bundle/vim-lsp"]
 	path = vim/.vim.symlink/bundle/vim-lsp
 	url = https://github.com/prabirshrestha/vim-lsp.git
-[submodule "vim/.vim.symlink/bundle/async.vim"]
-	path = vim/.vim.symlink/bundle/async.vim
-	url = https://github.com/prabirshrestha/async.vim.git
-[submodule "vim/.vim.symlink/bundle/vim-elixir"]
-	path = vim/.vim.symlink/bundle/vim-elixir
-	url = https://github.com/elixir-lang/vim-elixir.git
-[submodule "vim/.vim.symlink/bundle/ale"]
-	path = vim/.vim.symlink/bundle/ale
-	url = https://github.com/w0rp/ale.git
 [submodule "vim/.vim.symlink/bundle/fzf.vim"]
 	path = vim/.vim.symlink/bundle/fzf.vim
 	url = https://github.com/junegunn/fzf.vim.git
@@ -70,3 +40,9 @@
 [submodule "vim/.vim.symlink/bundle/vim-airline"]
 	path = vim/.vim.symlink/bundle/vim-airline
 	url = https://github.com/vim-airline/vim-airline.git
+[submodule "vim/.vim.symlink/bundle/vim-css3-syntax"]
+	path = vim/.vim.symlink/bundle/vim-css3-syntax
+	url = https://github.com/hail2u/vim-css3-syntax.git
+[submodule "vim/.vim.symlink/bundle/nvim-lspconfig"]
+	path = vim/.vim.symlink/bundle-nvim/nvim-lspconfig
+	url = https://github.com/neovim/nvim-lspconfig.git
