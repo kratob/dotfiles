@@ -222,6 +222,7 @@ bar {
     position top
 }
 
+output "Acer Technologies XB270HU #ASMrJkVZnard" mode 2560x1440@119.998Hz
 
 include /etc/sway/config.d/*
 
