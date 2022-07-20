@@ -1,4 +1,9 @@
-execute pathogen#infect()
+if has('nvim')
+  execute pathogen#infect('bundle/{}', 'bundle-nvim/{}')
+else
+  execute pathogen#infect()
+end
+
 
 set nocompatible
 "source $VIMRUNTIME/vimrc_example.vim
