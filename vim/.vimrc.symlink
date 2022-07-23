@@ -281,3 +281,6 @@ set tags+=\.git/tags
 " prosession
 
 let g:Prosession_ignore_expr = {-> !(isdirectory('.git'))}
+
+
+imap <C-Enter> <C-E><Enter>

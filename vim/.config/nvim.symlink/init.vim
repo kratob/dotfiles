@@ -10,3 +10,5 @@ if exists("g:neovide")
 end
 
 luafile ~/.config/nvim/lspconfig.lua
+
+let g:coq_settings = { 'auto_start': 'shut-up', 'keymap.pre_select': v:true, 'display.ghost_text.enabled': v:false, 'display.pum.fast_close': v:false, 'clients.snippets.warn': [] }
