@@ -2,5 +2,6 @@ package foreign-env
 package fzf
 package https://github.com/edc/bass
 package https://github.com/fabioantunes/fish-nvm
+package rbenv
 package z
 theme default
