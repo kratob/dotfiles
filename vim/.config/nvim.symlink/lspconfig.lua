@@ -49,11 +49,18 @@ if not configs.ruby_lsp then
 		"codeActions",
 	}
 
+	local function root_with_gem(...)
+		local root = util.root_pattern("Gemfile")(...)
+			if os.execute('grep -q ruby-lsp ' .. root .. '/Gemfile') == 0 then
+			return root
+		end
+	end
+
 	configs.ruby_lsp = {
 		default_config = {
 			cmd = { "bundle", "exec", "ruby-lsp" },
 			filetypes = { "ruby" },
-			root_dir = util.root_pattern("Gemfile", ".git"),
+			root_dir = root_with_gem,
 			init_options = {
 				enabledFeatures = enabled_features,
 			},
