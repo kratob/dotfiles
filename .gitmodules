@@ -46,3 +46,9 @@
 [submodule "vim/.vim.symlink/bundle/nvim-lspconfig"]
 	path = vim/.vim.symlink/bundle-nvim/nvim-lspconfig
 	url = https://github.com/neovim/nvim-lspconfig.git
+[submodule "vim/.vim.symlink/bundle/vim-obsession"]
+	path = vim/.vim.symlink/bundle/vim-obsession
+	url = https://github.com/tpope/vim-obsession.git
+[submodule "vim/.vim.symlink/bundle/vim-prosession"]
+	path = vim/.vim.symlink/bundle/vim-prosession
+	url = https://github.com/dhruvasagar/vim-prosession
