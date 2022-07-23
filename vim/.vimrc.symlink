@@ -1,5 +1,6 @@
 if has('nvim')
   execute pathogen#infect('bundle/{}', 'bundle-nvim/{}')
+  set signcolumn=yes
 else
   execute pathogen#infect()
 end
@@ -44,6 +45,7 @@ set showbreak=↳\
 set breakindent
 set backupcopy=yes
 set title
+set completeopt-=preview
 
 if !has('nvim')
   set noballooneval

@@ -8,3 +8,5 @@ if exists("g:neovide")
   set mouse=a
   let g:neovide_scroll_animation_length=0.1
 end
+
+luafile ~/.config/nvim/lspconfig.lua
