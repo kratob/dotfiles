@@ -26,7 +26,10 @@ include /etc/sway/config-vars.d/*
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+# output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg /usr/share/backgrounds/kyle-glenn-gHwDURuSafI-unsplash.jpg fill
+
+
 #
 # Example configuration:
 #
@@ -43,7 +46,8 @@ exec swayidle -w \
          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
          before-sleep 'swaylock -f -c 000000'
 
-bindsym $mod+Control+l exec swaylock -i /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png --scaling fill
+# bindsym $mod+Control+l exec swaylock -i /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png --scaling fill
+bindsym $mod+Control+l exec swaylock -i /usr/share/backgrounds/kyle-glenn-gHwDURuSafI-unsplash.jpg --scaling fill
 
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
