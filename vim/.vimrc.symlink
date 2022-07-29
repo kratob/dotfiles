@@ -11,6 +11,9 @@ set nocompatible
 "source $VIMRUNTIME/mswin.vim
 behave mswin
 
+colorscheme tender
+
+
 set backup
 set hlsearch
 set ruler
@@ -46,6 +49,11 @@ set breakindent
 set backupcopy=yes
 set title
 set completeopt-=preview
+set cursorline
+
+if has('nvim')
+  set undodir=~/.temp/nvim
+end
 
 if !has('nvim')
   set noballooneval
@@ -227,6 +235,8 @@ nmap <C-F> :Files<CR>
 
 " AIRLINE
 
+let g:airline_theme='tender'
+
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
@@ -252,9 +262,9 @@ let g:airline_section_z = '%3p%%%#__accent_bold# %3l/%L%#__restore__#%#__accent_
 augroup TenderColorOverrides
   autocmd!
   autocmd ColorScheme tender highlight Nbsp guifg=#f43753 gui=undercurl
-                         \ | highlight VertSplit guifg=#666666 ctermfg=235 guibg=#282828 ctermbg=235 gui=NONE cterm=NONE
+                         \ | highlight VertSplit guifg=#666666 ctermfg=242 guibg=#282828 ctermbg=235 gui=NONE cterm=NONE
                          \ | highlight NonText guifg=#555555 ctermfg=238 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-                         \ | highlight Comment guifg=#666666 ctermfg=242 guibg=NONE ctermbg=NONE gui=Italic cterm=NONE
+                         \ | highlight Comment guifg=#666666 ctermfg=242 guibg=NONE ctermbg=NONE gui=italic cterm=italic
                          \ | highlight Normal guifg=#eeeeee ctermfg=255 guibg=#222222 ctermbg=235 gui=NONE cterm=NONE
 augroup END
 

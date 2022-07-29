@@ -1,5 +1,2 @@
 set background=dark
-set cursorline
-colorscheme tender
-let g:airline_theme='tender'
 " colorscheme palenight
