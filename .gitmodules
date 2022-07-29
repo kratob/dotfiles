@@ -53,5 +53,5 @@
 	path = vim/.vim.symlink/bundle/vim-prosession
 	url = https://github.com/dhruvasagar/vim-prosession
 [submodule "vim/.vim.symlink/bundle/coq_nvim"]
-	path = vim/.vim.symlink/bundle/coq_nvim
+	path = vim/.vim.symlink/bundle-nvim/coq_nvim
 	url = https://github.com/ms-jpq/coq_nvim.git
