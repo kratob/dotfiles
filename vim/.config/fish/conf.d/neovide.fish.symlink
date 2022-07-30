@@ -1,1 +1,5 @@
-alias nv='neovide'
+if grep -qi wsl /proc/version
+  alias nv "/mnt/c/Users/Tobias\\\\ Kraze/scoop/apps/neovide/current/neovide.exe --wsl --multigrid"
+else
+  alias nv='neovide'
+end
