@@ -4,9 +4,6 @@
 [submodule "vim/.vim.symlink/bundle/vim-ruby"]
 	path = vim/.vim.symlink/bundle/vim-ruby
 	url = git@github.com:vim-ruby/vim-ruby.git
-[submodule "vim/.vim.symlink/bundle/vim-textobj-rubyblock"]
-	path = vim/.vim.symlink/bundle/vim-textobj-rubyblock
-	url = git@github.com:nelstrom/vim-textobj-rubyblock.git
 [submodule "vim/.vim.symlink/bundle/vim-textobj-user"]
 	path = vim/.vim.symlink/bundle/vim-textobj-user
 	url = git@github.com:kana/vim-textobj-user.git
