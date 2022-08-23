@@ -97,5 +97,4 @@ require'lspconfig'.eslint.setup{
   flags = lsp_flags,
 }
 
-lspconfig.ruby_lsp.setup({ on_attach = on_attach, flags = lsp_flags })
-
+-- lspconfig.ruby_lsp.setup({ on_attach = on_attach, flags = lsp_flags })
