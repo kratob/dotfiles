@@ -292,5 +292,14 @@ set tags+=\.git/tags
 
 let g:Prosession_ignore_expr = {-> !(isdirectory('.git'))}
 
+" ale
+
+let g:ale_linters = {
+\ 'javascript': [],
+\}
+
+let g:ale_ruby_rubocop_executable = 'bundle'
+let g:ale_int_on_text_changed = 0
+
 
 imap <C-Enter> <C-E><Enter>
