@@ -1,0 +1,8 @@
+#!/bin/sh
+
+set -x
+
+FILENAME="$HOME/wallpapers/wallpaper-$(date --iso-8601).jpg"
+curl -L 'https://source.unsplash.com/2560x1440/daily/?wallpaper' -L --output $FILENAME
+
+swaymsg "output * bg $FILENAME fill"
