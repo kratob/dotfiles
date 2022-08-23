@@ -1,6 +1,0 @@
-#!/bin/sh
-
-mkdir -p ~/sync
-
-KEYFILE=~/.sync.key
-encfs --extpass="cat $KEYFILE" ~/Dropbox/encrypted.bc ~/sync
