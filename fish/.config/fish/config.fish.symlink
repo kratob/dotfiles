@@ -3,6 +3,8 @@ starship init fish | source
 set -gx DISPLAY :0
 set -gx EDITOR nvim
 
+set -gx fish_greeting ""
+
 if status is-interactive
     # Commands to run in interactive sessions can go here
 end
