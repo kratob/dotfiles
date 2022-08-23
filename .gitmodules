@@ -52,3 +52,9 @@
 [submodule "vim/.vim.symlink/bundle/coq_nvim"]
 	path = vim/.vim.symlink/bundle-nvim/coq_nvim
 	url = https://github.com/ms-jpq/coq_nvim.git
+[submodule "vim/.vim.symlink/bundle/ale"]
+	path = vim/.vim.symlink/bundle/ale
+	url = https://github.com/dense-analysis/ale.git
+[submodule "vim/.vim.symlink/bundle-nvim/hop.nvim"]
+	path = vim/.vim.symlink/bundle-nvim/hop.nvim
+	url = https://github.com/phaazon/hop.nvim.git
