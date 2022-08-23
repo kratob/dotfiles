@@ -221,6 +221,9 @@ bindsym $mod+r mode "resize"
 #     }
 # }
 
+bindsym F11 exec ~/bin/change-volume -5%
+bindsym F12 exec ~/bin/change-volume +5%
+
 bar {
     swaybar_command waybar
     position top
