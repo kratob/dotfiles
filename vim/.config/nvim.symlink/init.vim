@@ -15,3 +15,4 @@ let g:coq_settings = { 'auto_start': 'shut-up', 'keymap.pre_select': v:false, 'd
 
 lua require'hop'.setup()
 noremap F :HopWord<Enter>
+noremap <M-f> F
