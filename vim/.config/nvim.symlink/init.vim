@@ -11,8 +11,10 @@ end
 
 luafile ~/.config/nvim/lspconfig.lua
 
-let g:coq_settings = { 'auto_start': 'shut-up', 'keymap.pre_select': v:false, 'display.ghost_text.enabled': v:false, 'display.pum.fast_close': v:false, 'clients.snippets.warn': [] }
+let g:coq_settings = { 'auto_start': 'shut-up', 'keymap.pre_select': v:false, 'keymap.repeat': '<C-.>', 'display.ghost_text.enabled': v:false, 'display.pum.fast_close': v:false, 'clients.snippets.warn': [] }
 
 lua require'hop'.setup()
 noremap F :HopWord<Enter>
 noremap <M-f> F
+
+let g:netrw_keepj=""
