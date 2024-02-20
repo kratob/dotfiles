@@ -2,7 +2,13 @@
 
 set -e
 
-FILENAME="$HOME/wallpapers/wallpaper-$(date --iso-8601).jpg"
-curl -L 'https://source.unsplash.com/2560x1440/daily/?wallpaper' -L --output $FILENAME
 
-swaymsg "output * bg $FILENAME fill"
+# FILENAME="$HOME/wallpapers/wallpaper-$(date --iso-8601).jpg"
+# curl -f -L 'https://source.unsplash.com/2560x1440/daily/?wallpaper' --output $FILENAME
+# 
+# swaymsg "output * bg $DIR/$FILENAME fill"
+
+DIR="$HOME/wallpapers"
+RANDOM_FILE=$(ls $DIR | shuf -n 1)
+
+swaymsg "output * bg $DIR/$RANDOM_FILE fill"
