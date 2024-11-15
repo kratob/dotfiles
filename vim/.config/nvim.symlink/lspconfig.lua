@@ -37,49 +37,7 @@ end
 local lspconfig = require("lspconfig")
 local configs = require("lspconfig.configs")
 local util = require("lspconfig.util")
-
-if not configs.ruby_lsp then
-	local enabled_features = {
-		"documentHighlights",
-		-- "documentSymbols",
-		-- "foldingRanges",
-		-- "selectionRanges",
-		-- "semanticHighlighting",
-		-- "formatting",
-    "diagnostics",
-		"codeActions",
-	}
-
-	local function root_with_gem(...)
-		local root = util.root_pattern("Gemfile")(...)
-			if os.execute('grep -q ruby-lsp ' .. root .. '/Gemfile') == 0 then
-			return root
-		end
-	end
-
-	configs.ruby_lsp = {
-		default_config = {
-			cmd = { "bundle", "exec", "ruby-lsp" },
-			filetypes = { "ruby" },
-			root_dir = root_with_gem,
-			init_options = {
-				enabledFeatures = enabled_features,
-			},
-			settings = {},
-		},
-		commands = {
-			FormatRuby = {
-				function()
-					vim.lsp.buf.format({
-						name = "ruby_lsp",
-						async = true,
-					})
-				end,
-				description = "Format using ruby-lsp",
-			},
-		},
-	}
-end
+-- local coq = require("coq")
 
 
 local lsp_flags = {
@@ -88,14 +46,28 @@ local lsp_flags = {
 }
 
 
-require'lspconfig'.tsserver.setup{
+require'lspconfig'.ts_ls.setup({
   on_attach = on_attach,
   flags = lsp_flags,
-}
+  settings = {
+    diagnostics = { ignoredCodes = { 1219 } },
+  },
+})
 
 require'lspconfig'.eslint.setup{
   on_attach = on_attach,
   flags = lsp_flags,
 }
 
--- lspconfig.ruby_lsp.setup({ on_attach = on_attach, flags = lsp_flags })
+local util = require('lspconfig.util')
+
+require'lspconfig'.angularls.setup{
+  root_dir = util.root_pattern('angular.json'),
+  on_attach = on_attach,
+  flags = lsp_flags,
+}
+
+require'lspconfig'.ruby_lsp.setup{
+  on_attach = on_attach,
+  flags = lsp_flags,
+}
