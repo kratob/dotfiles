@@ -238,6 +238,7 @@ bar {
 }
 
 output "Acer Technologies XB270HU #ASMrJkVZnard" mode 2560x1440@119.998Hz
+output "eDP-1" scale 1.8
 
 include /etc/sway/config.d/*
 
